@@ -32,14 +32,14 @@ class _GraficasCircularesScreenState extends State<GraficasCircularesScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CustomRadialProgress(porcentaje: porcentaje, color: Colors.blue),
-              CustomRadialProgress(porcentaje: porcentaje, color: Colors.red),
+              CustomRadialProgress(porcentaje: porcentaje * 1.2, color: Colors.red),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              CustomRadialProgress(porcentaje: porcentaje, color: Colors.purple),
-              CustomRadialProgress(porcentaje: porcentaje, color: Colors.indigo),
+              CustomRadialProgress(porcentaje: porcentaje * 4, color: Colors.purple),
+              CustomRadialProgress(porcentaje: porcentaje * 6, color: Colors.indigo),
             ],
           )
         ],
@@ -50,6 +50,7 @@ class _GraficasCircularesScreenState extends State<GraficasCircularesScreen> {
 
 class CustomRadialProgress extends StatelessWidget {
   final Color color;
+  final double porcentaje;
 
   const CustomRadialProgress({
     Key? key,
@@ -57,14 +58,15 @@ class CustomRadialProgress extends StatelessWidget {
     required this.color,
   }) : super(key: key);
 
-  final double porcentaje;
-
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 180,
       height: 180,
-      child: RadialProgress(porcentaje: porcentaje, colorPrimario: color),
+      child: RadialProgress(
+        porcentaje: porcentaje,
+        colorPrimario: color,
+      ),
     );
   }
 }

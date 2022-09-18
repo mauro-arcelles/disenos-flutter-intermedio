@@ -42,7 +42,7 @@ class PinterestMenu extends StatelessWidget {
   //       icon: Icons.supervised_user_circle)
   // ];
 
-  PinterestMenu({
+  const PinterestMenu({
     super.key,
     this.mostrar = true,
     this.backgroundColor = Colors.white,

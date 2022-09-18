@@ -1,6 +1,8 @@
+import 'package:disenos/theme/theme.dart';
 import 'package:disenos/widgets/slideshow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class SlideShowScreen extends StatelessWidget {
   const SlideShowScreen({Key? key}) : super(key: key);
@@ -25,11 +27,13 @@ class CustomSlideshow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context);
+
     return Slideshow(
       primaryBullet: 15,
       secondaryBullet: 12,
       // dotsUp: true,
-      // primaryColor: Colors.brown,
+      primaryColor: appTheme.currentTheme == ThemeData.dark() ? appTheme.currentTheme.colorScheme.secondary : Colors.pink,
       // secondaryColor: Colors.green,
       children: [
         SvgPicture.asset('assets/svgs/slide-1.svg'),

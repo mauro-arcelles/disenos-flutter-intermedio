@@ -1,5 +1,7 @@
+import 'package:disenos/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SliverListScreen extends StatelessWidget {
   const SliverListScreen({Key? key}) : super(key: key);
@@ -28,20 +30,21 @@ class _BotonNewList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
 
     return Container(
       width: size.width * 0.9,
       height: 80,
       child: MaterialButton(
         onPressed: () {},
-        color: const Color(0xffED6762),
+        color: appTheme == ThemeData.dark() ? appTheme.colorScheme.secondary : const Color(0xffED6762),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(topLeft: Radius.circular(50)),
         ),
-        child: const Text(
+        child: Text(
           'CREATE NEW LIST',
           style: TextStyle(
-            color: Colors.white,
+            color: appTheme.scaffoldBackgroundColor,
             fontSize: 18,
             fontWeight: FontWeight.bold,
             letterSpacing: 3,
@@ -76,6 +79,8 @@ class _MainScroll extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+
     return CustomScrollView(
       slivers: [
         // SliverAppBar(
@@ -87,7 +92,7 @@ class _MainScroll extends StatelessWidget {
             maxHeight: 170,
             minHeight: 200,
             child: Container(
-              color: Colors.white,
+              color: appTheme.scaffoldBackgroundColor,
               child: const _Titulo(),
             ),
           ),
@@ -139,13 +144,21 @@ class _Titulo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 30, width: double.infinity),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-          child: const Text('New', style: TextStyle(color: Color(0xff532128), fontSize: 50)),
+          child: Text(
+            'New',
+            style: TextStyle(
+              color: appTheme == ThemeData.dark() ? Colors.grey : const Color(0xff532128),
+              fontSize: 50,
+            ),
+          ),
         ),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 30),
@@ -157,7 +170,7 @@ class _Titulo extends StatelessWidget {
                 child: Container(
                   width: 120,
                   height: 8,
-                  color: const Color(0xffF7CDD5),
+                  color: appTheme == ThemeData.dark() ? Colors.grey : const Color(0xffF7CDD5),
                 ),
               ),
               const Text('List', style: TextStyle(color: Color(0xffD93A30), fontSize: 50, fontWeight: FontWeight.bold)),
@@ -181,13 +194,15 @@ class _ListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+
     return Container(
       alignment: Alignment.centerLeft,
       padding: const EdgeInsets.all(30),
       height: 130,
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: color,
+        color: appTheme == ThemeData.dark() ? Colors.grey : color,
         borderRadius: BorderRadius.circular(30),
       ),
       child: Text(

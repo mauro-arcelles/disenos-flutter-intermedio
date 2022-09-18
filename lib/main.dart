@@ -1,23 +1,27 @@
-// import 'package:disenos/labs/circular_progress_screen.dart';
-// import 'package:disenos/screens/graficas_circulares_screen.dart';
-// import 'package:disenos/screens/headers_screen.dart';
-// import 'package:disenos/screens/emergency_screen.dart';
-import 'package:disenos/screens/sliver_list_screen.dart';
-// import 'package:disenos/screens/pinterest_screen.dart';
-// import 'package:disenos/screens/slideshow_screen.dart';
+import 'package:disenos/screens/launcher_screen.dart';
+import 'package:disenos/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(
+      ChangeNotifierProvider(
+        create: (_) => ThemeChanger(3),
+        child: const MyApp(),
+      ),
+    );
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    final currentTheme = Provider.of<ThemeChanger>(context).currentTheme;
+
+    return MaterialApp(
+      theme: currentTheme,
       debugShowCheckedModeBanner: false,
       title: 'Diseños App',
-      home: SliverListScreen(),
+      home: const LauncherScreen(),
     );
   }
 }
