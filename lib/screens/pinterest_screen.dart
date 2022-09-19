@@ -34,35 +34,27 @@ class _PinterestMenuLocation extends StatelessWidget {
     final mostrar = Provider.of<_MenuModel>(context).mostrar;
     final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
 
+    int leftContainerWidth = 0;
+    if (MediaQuery.of(context).size.width > 500) {
+
+      leftContainerWidth = 300;
+    }
+
+    print(MediaQuery.of(context).size.width);
+
     return Positioned(
       bottom: 30,
-      left: (MediaQuery.of(context).size.width / 2) - (250 / 2),
+      left: ((MediaQuery.of(context).size.width - leftContainerWidth) / 2) - (250 / 2),
       child: PinterestMenu(
         mostrar: mostrar,
         backgroundColor: appTheme.scaffoldBackgroundColor,
         activeColor: appTheme == ThemeData.dark() ? appTheme.colorScheme.secondary : Colors.red,
         // inactiveColor: Colors.white,
         items: [
-          PinterestButton(
-              onPressed: () {
-                print('Icon pie_chart');
-              },
-              icon: Icons.pie_chart),
-          PinterestButton(
-              onPressed: () {
-                print('Icon search');
-              },
-              icon: Icons.search),
-          PinterestButton(
-              onPressed: () {
-                print('Icon notifications');
-              },
-              icon: Icons.notifications),
-          PinterestButton(
-              onPressed: () {
-                print('Icon supervised_user_circle');
-              },
-              icon: Icons.supervised_user_circle)
+          PinterestButton(onPressed: () {}, icon: Icons.pie_chart),
+          PinterestButton(onPressed: () {}, icon: Icons.search),
+          PinterestButton(onPressed: () {}, icon: Icons.notifications),
+          PinterestButton(onPressed: () {}, icon: Icons.supervised_user_circle)
         ],
       ),
     );
@@ -104,10 +96,17 @@ class _PinterestGridState extends State<PinterestGrid> {
 
   @override
   Widget build(BuildContext context) {
+    int count;
+    if (MediaQuery.of(context).size.width > 500) {
+      count = 3;
+    } else {
+      count = 2;
+    }
+
     return MasonryGridView.count(
       physics: const BouncingScrollPhysics(),
       controller: scrollController,
-      crossAxisCount: 2,
+      crossAxisCount: count,
       // mainAxisSpacing: 0,
       // crossAxisSpacing: 0,
       itemCount: items.length,
